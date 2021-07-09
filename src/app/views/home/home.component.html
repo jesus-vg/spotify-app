@@ -1,0 +1,4 @@
+<div class="container my-4">
+	<app-card-artist [items]="newReleases" *ngIf="!loading"></app-card-artist>
+	<app-loading *ngIf="loading"></app-loading>
+</div>

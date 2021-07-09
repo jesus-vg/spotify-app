@@ -1,0 +1,17 @@
+<div class="container my-4">
+	<div class="row">
+		<div class="col col-md-6 mx-auto">
+			<input #search
+				   (keypress)="restrictNumeric($event, search.value)"
+				   type="text"
+				   class="form-control"
+				   placeholder="Search artist..."
+			/>
+		</div>
+	</div>
+	<app-card-artist [items]="artists" *ngIf="!loading"></app-card-artist>
+	<app-loading *ngIf="loading"></app-loading>
+	<div class="my-4 text-center display-6" *ngIf="noData">
+		No results
+	</div>
+</div>
