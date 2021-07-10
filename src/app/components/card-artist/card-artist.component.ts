@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import MagicGrid                    from "magic-grid";
+import { Component, Input } from '@angular/core';
+import MagicGrid            from "magic-grid";
+import { Router }           from "@angular/router";
 
 @Component( {
 	selector: 'app-card-artist',
@@ -7,18 +8,11 @@ import MagicGrid                    from "magic-grid";
 	styles: [ `
 		.card {
 			width: 230px;
-		}
-
-		.gallery {
-			transition: height 3s ease-in;
-			overflow: hidden;
-		}
-
-		.showData {
-			height: 100%;
+			cursor: pointer;
 		}
 
 		.hideData {
+			overflow: hidden;
 			height: 0;
 		}
 
@@ -30,39 +24,53 @@ import MagicGrid                    from "magic-grid";
 	` ]
 } )
 
-export class CardArtistComponent implements OnInit {
+export class CardArtistComponent {
 	showData: boolean;
-
-	ngOnInit(): void {
-		console.log( 'init' )
-		setTimeout( () => {
-			this.initMasonry();
-			this.showData = true;
-		}, 1_000 )
-	}
-
 	@Input() items: any = [];
 
-	constructor() {
+	constructor( private router: Router ) {
 		this.showData = false;
+
+		setTimeout( () => {
+			console.log( 'initMasonry' )
+			this.initMasonry();
+		}, 1_000 )
+
+		setTimeout( () => {
+			// fixing bug masonry effect for position elements
+			if ( this.magicGrid.items.length > 0 ) {
+				this.showData = true;
+				console.log( 'positionItems' )
+				this.magicGrid.positionItems();
+			}
+		}, 2_000 )
 	}
 
+	magicGrid: any;
+
 	initMasonry() {
-		const magicGrid: any = new MagicGrid( {
+		this.magicGrid = new MagicGrid( {
 			container: '.my-grid',// Required. Can be a class, id, or an HTMLElement
 			static: true, // Required for static content. Default: false.
-			// items: 30, // Required for dynamic content. Initial number of items in the container.
+			items: 20, // Required for dynamic content. Initial number of items in the container.
 			gutter: 15, // Optional. Space between items. Default: 25(px).
 			maxColumns: 5, // Optional. Maximum number of columns. Default: Infinite.
-			useMin: false, // Optional. Prioritize shorter columns when positioning items? Default: false.
+			useMin: true, // Optional. Prioritize shorter columns when positioning items? Default: false.
 			useTransform: true, // Optional. Position items using CSS transform? Default: True.
 			animate: true, // Optional. Animate item positioning? Default: false.
 		} );
 
-		if ( magicGrid.items.length > 0 ) {
-			magicGrid.listen();
-			magicGrid.positionItems();
+		if ( this.magicGrid.items.length > 0 ) {
+			this.magicGrid.listen();
+			this.magicGrid.positionItems();
 		}
+	}
+
+	showDataArtist( data: any ) {
+
+		const idArtist = data.type === 'artist' ? data.id : data.artists[0].id
+		this.router.navigate( [ '/artist', idArtist ] ).then();
+		console.log( idArtist )
 	}
 }
 

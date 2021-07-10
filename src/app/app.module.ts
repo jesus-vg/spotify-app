@@ -11,32 +11,32 @@ import { HttpClientModule } from "@angular/common/http";
 import { NoimagePipe } from './pipes/noimage.pipe';
 
 // masonry
-import { NgxMasonryModule } from 'ngx-masonry';
+import { NgxMasonryModule }        from 'ngx-masonry';
 // the NgxMasonryModule library need the BrowserAnimationsModule module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 // views
-import { HomeComponent }    from './views/home/home.component';
-import { SearchComponent }  from './views/search/search.component';
-import { ArtistaComponent } from './views/artista/artista.component';
+import { HomeComponent }   from './views/home/home.component';
+import { SearchComponent } from './views/search/search.component';
+import { ArtistComponent } from './views/artist/artist.component';
 
 // components
 import { AppComponent }        from './app.component';
 import { NavbarComponent }     from './components/shared/navbar/navbar.component';
 import { CardArtistComponent } from './components/card-artist/card-artist.component';
-import { LoadingComponent } from './components/loading/loading.component';
+import { LoadingComponent }    from './components/loading/loading.component';
 
 @NgModule( {
 	declarations: [
 		AppComponent,
 		HomeComponent,
 		SearchComponent,
-		ArtistaComponent,
 		NavbarComponent,
 		CardArtistComponent,
 		NoimagePipe,
-  LoadingComponent
+		LoadingComponent,
+		ArtistComponent
 	],
 	imports: [
 		BrowserModule,

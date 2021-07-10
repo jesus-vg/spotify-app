@@ -31,9 +31,16 @@ export class SearchComponent {
 		}
 	}
 
+	timer: any;
+
 	restrictNumeric( e: any, text: string ) {
 		if ( /[A-Za-z\d\s]/.test( e.key ) ) {
-			this.searchArtists( text );
+			clearTimeout( this.timer );
+			this.timer = setTimeout( () => {
+				console.log('searching');
+				this.searchArtists( text );
+			}, 500 )
+
 			return true;
 		} else {
 			return false;

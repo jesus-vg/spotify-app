@@ -11,7 +11,7 @@ export class SpotifyService {
 
 	constructor( private http: HttpClient ) {
 		console.log( 'Spotify service working' )
-		this.token = 'BQAmhslVq1a9-1ZoptBMTUpydMButHUTDxzEdM1PFZXK7MVzBHRGtLrrh_UCg18O8QHxkQyBQ_rSr1G0u9A';
+		this.token = 'BQCkkm8Bs1Zh2Z0HYC8JhDkTeK15oMuTtixnaznPjvWsJ-nHjKBqBdbaU8hcWP0B3a6s4T2Joo-Nw_pDdFo';
 	}
 
 	getQuery( query: string ) {
@@ -32,9 +32,21 @@ export class SpotifyService {
 	}
 
 	searchArtists( search: string ) {
-		return this.getQuery( `search?q=${ search }&type=track%2Cartist&limit=10&offset=5` )
+		return this.getQuery( `search?q=${ search }&type=artist&limit=10&offset=5` )
 			.pipe(
 				map( ( data: any ) => data.artists.items )
 			);
 	}
+
+	getDataArtist( idArtist: string ) {
+		return this.getQuery( `artists/${ idArtist }` );
+	}
+
+	getTopTracks( idArtist: string ) {
+		return this.getQuery( `artists/${ idArtist }/top-tracks?market=us` )
+		.pipe(
+			map( ( data: any ) => data.tracks)
+		)
+	}
+
 }

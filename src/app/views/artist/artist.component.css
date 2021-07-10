@@ -1,0 +1,15 @@
+.card {
+	width: 350px;
+	margin: auto;
+}
+
+.play-song {
+	height: 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+tbody tr:hover .play-song {
+	height: inherit;
+	overflow: auto;
+}

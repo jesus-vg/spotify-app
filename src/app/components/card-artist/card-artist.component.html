@@ -1,6 +1,6 @@
-<div class="gallery" [class]="showData ? 'showData': 'hideData'">
+<div class="gallery" [class]="showData ? '': 'hideData'">
 	<div class="my-grid my-4">
-		<div class="card" *ngFor="let item of items">
+		<div class="card" *ngFor="let item of items" (click)="showDataArtist(item)">
 			<img
 				[src]="item.images | noimage"
 				class="card-img-top"

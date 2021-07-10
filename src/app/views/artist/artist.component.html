@@ -1,0 +1,74 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row" *ngIf="!loading">
+	<div class="col col-sm-4 col-md-3 text-center">
+		<img
+			[src]="dataArtist.images | noimage"
+			class="rounded-circle"
+			[alt]="dataArtist.name"
+			width="200"
+		/>
+	</div>
+	<div class="col col-sm-6 col-md-8 ">
+		<div class="display-6 mb-2">
+			{{ dataArtist.name }}
+		</div>
+		<p>
+			<a [href]="dataArtist.external_urls.spotify" target="_blank" class="btn btn-outline-primary">
+				go to the website of artist</a>
+		</p>
+	</div>
+	<div class="col col-sm-6 col-md-1 mt-5">
+		<button routerLink="/search" class="btn btn-outline-success">
+			Back
+		</button>
+	</div>
+</div>
+
+<div>
+	<table class="table text-white align-middle">
+		<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">Song</th>
+			<th scope="col"></th>
+			<th scope="col">Artist</th>
+			<th scope="col"></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let song of topTracks">
+			<td>
+				<img
+					[src]="song.album.images[2].url"
+					class="rounded-circle"
+					[alt]="song.album.name"
+					width="64"
+				/>
+			</td>
+			<td>
+				<span class="text-muted">
+					{{ song.album.name }}
+				</span>
+				<br>
+				{{ song.name }}
+			</td>
+			<td>
+				<span *ngIf="song.explicit">explicit</span>
+			</td>
+			<td>
+				<span *ngFor="let artist of song.artists; let indice=index">
+					{{ artist.name }}{{ indice === (song.artists.length-1)? '': ', ' }}
+				</span>
+			</td>
+			<td>
+				<div class="play-song">
+					<i class="fa fa-play"></i>
+				</div>
+				<!--<audio *ngIf="song.preview_url" [src]="song.preview_url" controls></audio>
+				<span *ngIf="!song.preview_url" class="badge badge-warning">No available</span>-->
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
