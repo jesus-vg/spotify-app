@@ -9,6 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 // pipes
 import { NoimagePipe } from './pipes/noimage.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 // masonry
 import { NgxMasonryModule }        from 'ngx-masonry';
@@ -34,9 +35,10 @@ import { LoadingComponent }    from './components/loading/loading.component';
 		SearchComponent,
 		NavbarComponent,
 		CardArtistComponent,
-		NoimagePipe,
 		LoadingComponent,
-		ArtistComponent
+		ArtistComponent,
+		NoimagePipe,
+		DomseguroPipe
 	],
 	imports: [
 		BrowserModule,

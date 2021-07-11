@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<div>
+<div class="mb-5">
 	<table class="table text-white align-middle">
 		<thead>
 		<tr>
@@ -48,25 +48,29 @@
 			</td>
 			<td>
 				<span class="text-muted">
-					{{ song.album.name }}
+					{{ song.name }}
 				</span>
 				<br>
-				{{ song.name }}
+				{{ song.album.name }}
 			</td>
 			<td>
 				<span *ngIf="song.explicit">explicit</span>
 			</td>
 			<td>
-				<span *ngFor="let artist of song.artists; let indice=index">
-					{{ artist.name }}{{ indice === (song.artists.length-1)? '': ', ' }}
+				<span *ngFor="let artist of song.artists; let indice=index"
+					  (click)="showDataArtist(artist.id)"
+					  class="puntero"
+				>
+					{{ artist.name }}
+					{{ indice === (song.artists.length - 1) ? '' : ', ' }}
 				</span>
 			</td>
 			<td>
-				<div class="play-song">
-					<i class="fa fa-play"></i>
-				</div>
-				<!--<audio *ngIf="song.preview_url" [src]="song.preview_url" controls></audio>
-				<span *ngIf="!song.preview_url" class="badge badge-warning">No available</span>-->
+				<iframe [src]="song.uri | domseguro : 'https://open.spotify.com/embed?uri='"
+						width="300" height="80"
+						allowtransparency="true"
+						allow="encrypted-media"
+				></iframe>
 			</td>
 		</tr>
 		</tbody>

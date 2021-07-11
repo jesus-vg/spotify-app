@@ -13,9 +13,16 @@ export class SearchComponent {
 	loading: boolean;
 	noData: boolean;
 
+	// error validation
+	errorService: boolean
+	errorMessage: string
+
 	constructor( private spotify: SpotifyService ) {
 		this.loading = true;
 		this.noData = false;
+
+		this.errorService = false
+		this.errorMessage = '';
 	}
 
 	searchArtists( search: string ) {
@@ -23,11 +30,14 @@ export class SearchComponent {
 			this.loading = true;
 			this.spotify.searchArtists( search )
 				.subscribe( ( data: any ) => {
-					console.log( data )
+					// console.log( data )
 					this.loading = false;
 					this.noData = data.length === 0;
 					this.artists = data;
-				} )
+				}, error => {
+					this.errorService = true
+					this.errorMessage = error.error.message
+				} );
 		}
 	}
 
@@ -37,7 +47,7 @@ export class SearchComponent {
 		if ( /[A-Za-z\d\s]/.test( e.key ) ) {
 			clearTimeout( this.timer );
 			this.timer = setTimeout( () => {
-				console.log('searching');
+				// console.log('searching');
 				this.searchArtists( text );
 			}, 500 )
 

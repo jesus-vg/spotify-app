@@ -3,3 +3,15 @@ body {
 	background-color: black;
 	/*font-family: Consolas, Monaco, sans-serif;*/
 }
+
+.note-error {
+	border-left: .25rem solid tomato;
+	border-radius: .5rem;
+	padding: 1rem .7rem;
+	color: tomato;
+}
+
+.puntero{
+	cursor: pointer;
+	text-decoration: underline;
+}

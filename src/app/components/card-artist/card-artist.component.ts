@@ -32,7 +32,7 @@ export class CardArtistComponent {
 		this.showData = false;
 
 		setTimeout( () => {
-			console.log( 'initMasonry' )
+			// console.log( 'initMasonry' )
 			this.initMasonry();
 		}, 1_000 )
 
@@ -40,7 +40,7 @@ export class CardArtistComponent {
 			// fixing bug masonry effect for position elements
 			if ( this.magicGrid.items.length > 0 ) {
 				this.showData = true;
-				console.log( 'positionItems' )
+				// console.log( 'positionItems' )
 				this.magicGrid.positionItems();
 			}
 		}, 2_000 )
